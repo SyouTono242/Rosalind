@@ -11,6 +11,7 @@ for string in lines:
     string = string.lstrip("Rosalind_")
     string = "".join([i for i in string if not (i.isdigit())])
     newLines.append(string.replace("\n",""))
+print(newLines)
 
 listA, listC, listG, listT = [], [], [], []
 bestList = []
