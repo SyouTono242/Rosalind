@@ -22,16 +22,26 @@ table = {
         'TGC':'C', 'TGT':'C', 'TGA':'_', 'TGG':'W',
     }
 
-f = open("input.txt","r")
-DNA = f.read().split()[1]
-proteinList = []
-start = 0
-n = 0
-for i in range(0,len(DNA)//3):
-    aaList = []
-    if DNA[(n+3*i):(n+3*i+3)]=="ATG":
-        while DNA[(3*n+3*i):(3*n+3*i+3)]!=("TAA"or"TAG"or"TGA"):
-            aaList.append(table[DNA[(n+3*i):(n+3*i+3)]])
-            n += 1
-        proteinList.append("".join(aaList))
-print(proteinList)
+def find_protein(DNA):
+        startList = []
+        for i in range(len(DNA)):
+            if DNA[i:(i+3)]=="ATG":
+                startList.append(i)
+
+        for start in startList:
+                protein = ""
+                j = 0
+                while (start+3*j+3 <= len(DNA)) and table[DNA[(start+3*j):(start+3*j+3)]] and (table[DNA[(start+3*j):(start+3*j+3)]] != "_"):
+                        protein += table[DNA[(start+3*j):(start+3*j+3)]]
+                        j += 1
+                if start+3*j+3 <= len(DNA):
+                        print(protein)
+
+def main():
+        f = open("input.txt","r")
+        DNA = "".join(f.read().split()[1::])
+        find_protein(DNA)
+        reverseDNA = DNA.replace("A","t").replace("T","a").replace("C","g").replace("G","c").upper()[::-1]
+        find_protein(reverseDNA)
+
+main()
