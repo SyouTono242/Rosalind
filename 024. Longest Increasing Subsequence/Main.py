@@ -8,6 +8,7 @@ def sub(pi, n):
     L = 1
     M[0] = 0
 
+    # Binary search
     for i in range(1, n):
         lower = 0
         upper = L
@@ -36,8 +37,8 @@ def sub(pi, n):
 
 
 f = open("input.txt","r").read().split()
-n = int(f[0])
-pi = [int(x) for x in f[1::]]
+n = int(f[0])                   # length of the sequence
+pi = [int(x) for x in f[1::]]   # the sequence
 
 out = open("output.txt","w")
 inc = sub(pi,n)
